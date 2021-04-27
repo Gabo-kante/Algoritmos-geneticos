@@ -5,35 +5,42 @@
  */
 package Reinas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author gabri
  */
 public class Cruza {
-    public static Reina cruzaPorMascaraBinaria(Reina madre, Reina padre,
-             int[] mask){
-        int[] gen1 = new int[madre.getGenotipo().length];
-        int[] gen2 = new int[madre.getGenotipo().length];
-        // recorrer la mascara ¿
-        for(int x=0; x < mask.length; x++){
-            // padre jeje
-            if(mask[x]==0){
-                gen1[x]= padre.getGenotipo()[x];
-                gen2[x]= madre.getGenotipo()[x];
-            } 
-            // información madre
-            else{
-                gen1[x] = madre.getGenotipo()[x];
-                gen2[x] = padre.getGenotipo()[x];
+        ArrayList<Individuo>  res = new ArrayList<>() ;
+    public void Cruza(){
+    }
+    
+    public static Individuo op_cruza ( Individuo gen1, Individuo gen2,int [] mask){
+        
+        int c1 [] = new int[mask.length];
+        int c2 [] = new int[mask.length];
+
+        for (int b=0; b < mask.length; b++){
+            if(mask[b]==1){
+                c1[b] = gen1.getGenotipo()[b];
+                c2[b] = gen2.getGenotipo()[b];
+            } else{
+                c1[b]=gen2.getGenotipo()[b];
+                c2[b] = gen1.getGenotipo()[b];
+
             }
         }
-        Reina i1 = new Reina(gen1);
-        Reina i2 = new Reina(gen2);
-        
-        if(i1.getFitness()< i2.getFitness()){
-            return i1;
-        } else{
-            return i2;
+             Individuo aux = new Individuo(c1);       
+             Individuo aux2 = new Individuo(c2);       
+
+    
+        if (aux.getFitness()<=aux2.getFitness()){
+            return aux;
+        } else {
+            return aux2;
         }
-    }
+          
+        
+     }
 }

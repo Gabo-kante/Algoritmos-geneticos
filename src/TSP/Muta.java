@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TCP;
+package TSP;
 
-import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -13,9 +12,8 @@ import java.util.Random;
  * @author gabri
  */
 public class Muta {
-
-    public static void mutaSimple(Individuo ind) {
-        Random ran = new Random();
+    public static void aplicarMutaAleatoria(IndividuoTSP ind){
+         Random ran = new Random();
         int pos = ran.nextInt(ind.getGenotipo().length);
         int nuevapos = ran.nextInt(ind.getGenotipo().length);
         while (pos == nuevapos || pos == 0 || nuevapos==0) {
@@ -27,12 +25,13 @@ public class Muta {
         ind.getGenotipo()[nuevapos] = aux;
         ind.calcularFitness();
     }
-    
-   /* public static void main(String args[]) throws IOException{
-        int[][] hola = LeerDatos.tokenizarDataSet();
-        Individuo n = new Individuo(3,hola);
-        System.out.println(n.toString());
-        mutaSimple(n);
-        System.out.println(n.toString());
-    }*/
-}
+
+    }
+//     public static void main(String args[]) {
+//         IndividuoTCP it = new IndividuoTCP(5);
+//         it.imprimirIndividuo();
+//          Muta.aplicarMutaAleatoria(it);
+//                   it.imprimirIndividuo();
+//
+//     }
+

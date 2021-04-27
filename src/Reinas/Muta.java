@@ -12,11 +12,14 @@ import java.util.Random;
  * @author gabri
  */
 public class Muta {
-     public static void mutaSimple(Reina ind){
+    public static void aplicarMutaAleatoria(Individuo p){
         Random ran = new Random();
-        int pos = ran.nextInt(ind.getGenotipo().length);
-        int nuevapos = ran.nextInt(ind.getGenotipo().length);
-        ind.getGenotipo()[pos] = nuevapos;
-        ind.calcularFitness();
+        int pos = ran.nextInt(p.getGenotipo().length);
+
+            p.getGenotipo()[pos]=  ran.nextInt(p.getGenotipo().length);;
+
+       
+        p.calcularFit();
+
     }
 }

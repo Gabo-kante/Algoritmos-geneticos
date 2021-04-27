@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TCP;
+package Reinas;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -14,49 +14,49 @@ import java.util.Random;
  */
 public class Poblacion {
     
- private ArrayList<Individuo> poblacion;
+ private LinkedList<Individuo> poblacion;
     private int i;
-    private int inicial;
+    private int tam;
 
-    public Poblacion(int i,int inicial,int[][] camino){
+    public Poblacion(int i,int tam){
         this.i = i;
-        this.inicial=inicial;
-        this.poblacion = new ArrayList<>();
-        inicializarAleatorimente(camino);
+        this.tam=tam;
+        this.poblacion = new LinkedList<>();
+        inicializarAleatorimente();
     }
 
-    public Poblacion(ArrayList<Individuo> muestra,int[][] caminos){
-        this.poblacion = new ArrayList<>();
+    public Poblacion(LinkedList<Individuo> muestra){
+        this.poblacion = new LinkedList<>();
         for(int x=0;x<muestra.size();x++){
-            this.poblacion.add(new Individuo(muestra.get(x).getGenotipo(),caminos));
+            this.poblacion.add(new Individuo(muestra.get(x).getGenotipo()));
         }
     }
 
       public Poblacion(){
-        this.poblacion = new ArrayList<>();
+        this.poblacion = new LinkedList<>();
         
     }
 
-    public Poblacion(Poblacion n,int[][] camino){
-        this.poblacion = new ArrayList<>();
+    public Poblacion(Poblacion n){
+        this.poblacion = new LinkedList<>();
         for(Individuo aux: n.getPoblacion()){
-            this.poblacion.add(new Individuo(aux.getGenotipo(),camino));
+            this.poblacion.add(new Individuo(aux.getGenotipo()));
 
         }
 
     }
 
-    public void inicializarAleatorimente(int[][] camino){
+    public void inicializarAleatorimente(){
 
        for(int x=0; x< this.i; x++){
-            this.poblacion.add(new Individuo(this.inicial,camino));
+            this.poblacion.add(new Individuo(this.tam));
 
        }
 
     }
-    public ArrayList<Individuo> generarMuestraAleatoria(double p){
+    public LinkedList<Individuo> generarMuestraAleatoria(double p){
         int c = (int)((this.i*p)/100);
-        ArrayList<Individuo> muestra = new ArrayList<>();
+        LinkedList<Individuo> muestra = new LinkedList<>();
         int pa = 0;
         Random ran = new Random();
         for(int x=0; x<c;x++){
@@ -67,13 +67,13 @@ public class Poblacion {
      return muestra;
     }
 
-    public ArrayList<Individuo> generarMuestraMejores(double p){
+    public LinkedList<Individuo> generarMuestraMejores(double p){
         int c = (int)((this.i*p)/100);
-       ArrayList<Individuo> muestra = new ArrayList<>();
+        LinkedList<Individuo> muestra = new LinkedList<>();
      return muestra;
     }
    
-   public ArrayList<Individuo> getPoblacion(){
+   public LinkedList<Individuo> getPoblacion(){
 
     return poblacion;
    }

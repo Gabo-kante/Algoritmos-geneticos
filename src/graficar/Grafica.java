@@ -5,83 +5,57 @@
  */
 package graficar;
 
-//import javafx.geometry.Orientation;
-import javax.swing.JInternalFrame;
+import java.util.ArrayList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
- * @author working
+ * @author gabri
  */
 public class Grafica {
 
+
+
+    private String tituloGrafica;
+    private String tituloEjeX,tituloEjeY;
     private JFreeChart grafica;
     private XYSeriesCollection series;
-    private String ejeX, ejeY, titulo;
 
-    public Grafica(String ejeX, String ejeY, String titulo) {
-        this.grafica = null;
+    public Grafica(String titulo,String tituloX,String tituloY) 
+    {
+        this.tituloGrafica = "Gráfica";
+        this.tituloEjeX = tituloX;
+        this.tituloEjeY = tituloY;
+        
         this.series = new XYSeriesCollection();
-        this.ejeX = ejeX;
-        this.ejeY = ejeY;
-        this.titulo = titulo;
     }
-
-    public void agrearSerie(String nombre) {
-        XYSeries serie = new XYSeries(nombre);
-        this.series.addSeries(serie);
-    }
-
-    /*public void agregarDatoASerie(String nombre, XYDataItem dato)   {
-       this.series.getSeries(nombre).add(dato);
-    }*/
-    public void agregarSerie(String nombre, double[] datos) {
-
+    
+    public void crearSerie(String nombre,double[] datos)
+    {
+      
         XYSeries serie = new XYSeries(nombre);
         // agregar cada uno de los datos en la serie 
-        for (int x = 0; x < datos.length; x++) {
+        for (int x=0; x < datos.length;x++){
             serie.add(x, datos[x]);
-            //serie.add(x,0);
         }
         // agregamos la serie que se generÃ³ 
         this.series.addSeries(serie);
-
     }
-
-    /*public void agregarSerie(String nombre, int[] datos) {
-
-        XYSeries serie = new XYSeries(nombre);
-        // agregar cada uno de los datos en la serie 
-        for (int x = 0; x < datos.length; x++) {
-            serie.add(x, datos[x]);
-            serie.add(x,0);
-        }
-        // agregamos la serie que se generÃ³ 
-        this.series.addSeries(serie);
-
-    }*/
-
-    public JFreeChart getGrafica() {
-        return this.grafica;
+    
+    public void mostrarGrafica()
+    {
+    
+        this.grafica = ChartFactory.createXYLineChart(this.tituloGrafica, tituloEjeX, tituloEjeY,
+                    series);
+        // crear un panel con la grafica
+        ChartFrame panel = new ChartFrame(null, grafica);
+        panel.pack();
+        panel.setVisible(true);
+        
     }
-
-    public void crearGrafica() {
-        this.grafica = ChartFactory.createXYLineChart(titulo, ejeX, ejeY, series, PlotOrientation.VERTICAL, true, true, true);
-    }
-
-    public void muestraGrafica() {
-        JInternalFrame framee = new JInternalFrame();
-        ChartFrame frame = new ChartFrame("Histograma de color", grafica);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(500,370);
-
-    }
-
 }
