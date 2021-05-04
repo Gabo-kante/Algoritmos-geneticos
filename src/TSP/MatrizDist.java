@@ -63,7 +63,7 @@ public class MatrizDist {
     
     }
 public static void main(String args[]){
-        MatrizDist md = new MatrizDist(4,10);
+        MatrizDist md = new MatrizDist(20,1000);
         md.imprimirMat();
 }
 }

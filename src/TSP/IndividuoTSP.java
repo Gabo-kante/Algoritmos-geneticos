@@ -161,7 +161,7 @@ public class IndividuoTSP {
       
       // System.out.println("Prueba #" + i + ": ");
        
-            Generaciones gen1 = new Generaciones(20,.5,5,4,15);
+            Generaciones gen1 = new Generaciones(20,.5,5,20,1000);
             gen1.evolucionar();
            Grafica graf1 = new Grafica("Comportamiento (200,.2,400,25)","Generación","Fitness");
            graf1.crearSerie("Datos : (200,.2,400,25)",gen1.getGens());
