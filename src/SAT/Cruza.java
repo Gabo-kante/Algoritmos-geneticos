@@ -13,11 +13,11 @@ import java.util.LinkedList;
  * @author gabri
  */
 public class Cruza {
-      ArrayList<Individuo>  res = new ArrayList<>() ;
+        ArrayList<Individuo>  res = new ArrayList<>() ;
     public void Cruza(){
     }
     
-    public static Individuo op_cruza ( Individuo gen1, Individuo gen2,int [] mask,LinkedList<int[]>muestras){
+    public static Individuo ACT_cruza ( Individuo gen1, Individuo gen2,int [] mask,LinkedList<int[]>muestras){
         
         int c1 [] = new int[mask.length];
         int c2 [] = new int[mask.length];
