@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reinas;
+package binario;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -50,7 +49,7 @@ public class Poblacion {
     public Individuo getMejorIndividuo() {
         int idMejor = 0;
         for (int x = 1; x < this.individuos.size(); x++) {
-            if (this.individuos.get(x).getFitness() < this.individuos.get(idMejor).getFitness()) { //el mejor es el de menor fitness
+            if (this.individuos.get(x).getFitness() > this.individuos.get(idMejor).getFitness()) {
                 idMejor = x;
             }
         }
@@ -87,10 +86,10 @@ public class Poblacion {
             for (int v = 0; v < (this.individuos.size() - z); v++) {
 
                 if (this.individuos.get(v).getFitness()
-                        < this.individuos.get(v + 1).getFitness()) { 
-                    Individuo aux = new Individuo(this.individuos.get(v).getGenotipo()); 
-                    this.individuos.set(v, new Individuo(this.individuos.get(v + 1).getGenotipo())); 
-                    this.individuos.set(v + 1, aux); 
+                        > this.individuos.get(v + 1).getFitness()) { //si el individuo anterior es mayor que el siguiente
+                    Individuo aux = new Individuo(this.individuos.get(v).getGenotipo()); //almacenamos el individuo anterior
+                    this.individuos.set(v, new Individuo(this.individuos.get(v + 1).getGenotipo())); //el individuo anterior se convierte en el siguiente
+                    this.individuos.set(v + 1, aux); //y el individuo siguiente se convierte en el anterior
 
                 }
             }
@@ -98,26 +97,31 @@ public class Poblacion {
 
     }
 
-    public int getFitnessTotal() {
-        int acumulador = 0;
+    /*private void ordenarPoblacionActual2() {
+        ArrayList<Individuo> temporal = new ArrayList();
 
-        for (int i = 0; i < individuos.size(); i++) {
-            acumulador+= individuos.get(i).getFitness();
+        for (int i = 0; i < this.individuos.size(); i++) { //Estamos coparando el individuo i
+            for (int j = 1 + i; j < this.individuos.size(); j++) { //con todos los individuos de la lista
 
+                //guardamos el mas chico y seteamos el genotipo
+                if (this.individuos.get(i).getFitness() > this.individuos.get(j).getFitness()) {
+
+                    Individuo aux = new Individuo(this.individuos.get(j).getGenotipo());
+                    temporal.add(aux);
+                    this.individuos.set(i, this.individuos.get(i));//Para no perder el individuo
+
+                } else {
+                    Individuo aux = new Individuo(this.individuos.get(i).getGenotipo());
+                    temporal.add(aux);
+                }
+            }
         }
-        return acumulador;
-    }
 
-    public void mostrarPob() {
-        System.out.println("Tengo " + individuos.size()+" individuos");
-        for (int z = 0; z < individuos.size(); z++) {
-            String aux = "Genotipo: ";
-            aux += Arrays.toString(individuos.get(z).getGenotipo());            
-            aux += " Fenotipo => " + individuos.get(z).getFitness();
-            System.out.println(aux);
-        }
-    }
+        this.individuos.clear();
+        this.individuos = (ArrayList<Individuo>) temporal.clone();
+        temporal.clear();
 
+    }*/
 
 
 

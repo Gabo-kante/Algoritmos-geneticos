@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TSP;
+package TSPinclinaciones;
 
 import java.util.Random;
 

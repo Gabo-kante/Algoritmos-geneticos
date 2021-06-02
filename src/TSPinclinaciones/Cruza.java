@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TSP;
+package TSPinclinaciones;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,7 +21,7 @@ public class Cruza {
     //maskIndices[4]= [-1, 2, 1, 4] 
     //maskIndices[4]= [ 3, 2, 1, 4]
 
-    public static Individuo cruzaAsexual(Individuo padre, Individuo madre, int matrizCargada[][]) {
+    public static Individuo cruzaAsexual(Individuo padre, Individuo madre, int matrizCargada[][], int[] inclinaciones) {
         int maskIndices[] = new int[padre.getGenotipo().length - 1];
         // creo la mascara de índices 
         for (int ii = 0; ii < maskIndices.length; ii++) {
@@ -40,8 +40,8 @@ public class Cruza {
             genotipoNuevo1[maskIndices[x - 1]] = padre.getGenotipo()[x];
             genotipoNuevo2[maskIndices[x - 1]] = madre.getGenotipo()[x];
         }
-        Individuo hijo1 = new Individuo(genotipoNuevo1,matrizCargada);
-        Individuo hijo2 = new Individuo(genotipoNuevo2, matrizCargada);
+        Individuo hijo1 = new Individuo(genotipoNuevo1,matrizCargada, inclinaciones);
+        Individuo hijo2 = new Individuo(genotipoNuevo2, matrizCargada,inclinaciones);
 
         ArrayList<Individuo> lista = new ArrayList<>();
         lista.add(madre);
@@ -55,7 +55,7 @@ public class Cruza {
         Individuo mejor = lista.get(0);
 
         for (int x = 1; x < lista.size(); x++) {
-            if (lista.get(x).getFitness() < mejor.getFitness()) {
+            if (lista.get(x).getFitnessGeneral() < mejor.getFitnessGeneral()) {
                 mejor = lista.get(x);
             }
         }

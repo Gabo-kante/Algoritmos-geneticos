@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reinas;
+package TSP;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,10 +20,31 @@ public class Poblacion {
         this.individuos = (ArrayList<Individuo>) aux.clone();
     }
 
-    public Poblacion(int tamPob, int tamIndividuo) {
+    public Poblacion(int tamPob, int ciudadInicial, int nCiudades) {
         this.individuos = new ArrayList<>();
+       // System.out.println("------- NO CUENTO -------");
+        Individuo auxIND = new Individuo(ciudadInicial, nCiudades);
+       // System.out.println("------- --------- -------");
+//        System.out.println("------- CERO -------");
+//        HerramientasTSP.imprimirMat(auxIND.getDistanciasCaminos());
+//        System.out.println("");
+        
         for (int i = 0; i < tamPob; i++) {
-            this.individuos.add(new Individuo(tamIndividuo));
+            Individuo auxIND2 = new Individuo(ciudadInicial, nCiudades);
+            auxIND2.setDistanciasCaminos(auxIND.getDistanciasCaminos().clone());
+//            System.out.println("------- "+i+" -------");
+//            HerramientasTSP.imprimirMat(auxIND2.getDistanciasCaminos());
+//            System.out.println("FIT: "+auxIND2.getFitness());
+//            System.out.println("");
+            this.individuos.add(auxIND2);
+        }
+    }
+
+    public Poblacion(int tamPob, int ciudadInicial, int matrizCargada[][]) {
+        this.individuos = new ArrayList<>();
+
+        for (int i = 0; i < tamPob; i++) {
+            this.individuos.add(new Individuo(ciudadInicial, matrizCargada.clone()));
         }
     }
 
@@ -38,7 +59,7 @@ public class Poblacion {
 
             for (int x = this.individuos.size() - 1; x >= this.individuos.size() - n; x--) { //recorremos la lista ordenada de atras para delante
 
-                Individuo e = new Individuo(this.individuos.get(x).getGenotipo());
+                Individuo e = new Individuo(this.individuos.get(x).getGenotipo(), this.individuos.get(x).getDistanciasCaminos());
                 nMejores.add(e);
             }
             return nMejores;
@@ -54,30 +75,10 @@ public class Poblacion {
                 idMejor = x;
             }
         }
-        return new Individuo(this.individuos.get(idMejor).getGenotipo());
-
+        return this.individuos.get(idMejor);
     }
 
-    public ArrayList<Individuo> getMuestraAleatoria(int n) {
-        // validar que n <= tamaño de la población
-        if (n < this.individuos.size()) {
-            // creamos un coleccion nueva de individuos
-            ArrayList<Individuo> muestra = new ArrayList<>();
-            Random ran = new Random();
-            for (int x = 0; x < n; x++) {
-                int pos = ran.nextInt(this.individuos.size());
-                Individuo e = new Individuo(this.individuos.get(pos).getGenotipo());
-                muestra.add(e);
-            }
-            return muestra;
-        }
 
-        return (ArrayList<Individuo>) this.individuos.clone();
-    }
-
-    /**
-     * @return the individuos
-     */
     public ArrayList<Individuo> getIndividuos() {
         return individuos;
     }
@@ -88,8 +89,8 @@ public class Poblacion {
 
                 if (this.individuos.get(v).getFitness()
                         < this.individuos.get(v + 1).getFitness()) { 
-                    Individuo aux = new Individuo(this.individuos.get(v).getGenotipo()); 
-                    this.individuos.set(v, new Individuo(this.individuos.get(v + 1).getGenotipo())); 
+                    Individuo aux = new Individuo(this.individuos.get(v).getGenotipo(), this.individuos.get(v).getDistanciasCaminos() ); 
+                    this.individuos.set(v, new Individuo(this.individuos.get(v + 1).getGenotipo(),this.individuos.get(v + 1).getDistanciasCaminos())); 
                     this.individuos.set(v + 1, aux); 
 
                 }
@@ -109,14 +110,24 @@ public class Poblacion {
     }
 
     public void mostrarPob() {
-        System.out.println("Tengo " + individuos.size()+" individuos");
+        System.out.println("----- Tengo " + individuos.size()+" individuos -----");
         for (int z = 0; z < individuos.size(); z++) {
             String aux = "Genotipo: ";
             aux += Arrays.toString(individuos.get(z).getGenotipo());            
-            aux += " Fenotipo => " + individuos.get(z).getFitness();
-            System.out.println(aux);
+            aux += " Fitness => " + individuos.get(z).getFitness();
+            System.out.println("------- " + z + " -------");
+            System.out.println(aux);         
+            //HerramientasTSP.imprimirMat(individuos.get(z).getDistanciasCaminos());
+            System.out.println("");
         }
     }
+
+    public void setIndividuos(ArrayList<Individuo> individuos) {
+        this.individuos = individuos;
+    }
+    
+    
+    
 
 
 

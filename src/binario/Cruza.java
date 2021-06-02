@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reinas;
-
+package binario;
 
 /**
  *
@@ -32,7 +31,7 @@ public class Cruza {
         hijo1 = new Individuo(genoitpoHijo1);
         hijo2 = new Individuo(genotipoHijo2);
 
-        if (hijo1.getFitness() < hijo2.getFitness()) {
+        if (hijo1.getFitness() > hijo2.getFitness()) {
             return hijo1;
         } else {
             return hijo2;
