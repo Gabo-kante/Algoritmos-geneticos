@@ -70,9 +70,7 @@ public class Individuo {
 
             }
             this.fitness += distanciasCaminos[this.genotipo[0]][this.genotipo[distanciasCaminos.length - 1]];
-            //System.out.println("Sumado: " + distanciasCaminos[this.genotipo[0]][this.genotipo[distanciasCaminos.length - 1]]);
-
-            //System.out.println("Fitness: " + this.fitness);
+            
         }
 
     }

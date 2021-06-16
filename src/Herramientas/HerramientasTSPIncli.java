@@ -82,49 +82,6 @@ public class HerramientasTSPIncli {
         }
 
     }
-
-//    public static void escribirInclinaciones(int matrizInclinaciones[]) {
-//
-//        File carpetaGuardar = new File("MatricesTSP");
-//        if (!carpetaGuardar.exists()) {
-//            carpetaGuardar.mkdirs();
-//        }
-//        String carpeta = carpetaGuardar.getAbsolutePath();
-//
-//        //aqui vamos a escribir el archivo de inclinaciones
-//        try {
-//            FileWriter fileInclinaciones = new FileWriter(carpeta + "\\InclinacionesDeMatrizPrueba.txt");
-//            BufferedWriter salidaInclinaciones = new BufferedWriter(fileInclinaciones);
-//
-//            String renglon = Arrays.toString(matrizInclinaciones);
-//            char[] aux = renglon.substring(1, renglon.length() - 1).toCharArray();
-//
-//            for (int i = 0; i < aux.length; i++) {
-//
-//                if (aux[i] == 32 || aux[i] == 44) {
-//                } else {
-//                    salidaInclinaciones.append(aux[i]);
-//                    if (i != aux.length - 1) {
-//
-//                        salidaInclinaciones.append(",");
-//                    }
-//                }
-//
-//            }
-//            salidaInclinaciones.append("\n");
-//            salidaInclinaciones.close();
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(HerramientasTSP.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
-
-            
-    
-    
-    
-    
     public static void escribir(int matrizEscribe[][], int matrizInclinaciones[]) {
         File carpetaGuardar = new File("MatricesTSP");
         if (!carpetaGuardar.exists()) {

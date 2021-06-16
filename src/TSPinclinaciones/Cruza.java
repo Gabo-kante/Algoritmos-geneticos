@@ -13,13 +13,6 @@ import java.util.Random;
  * @author gabri
  */
 public class Cruza {
-    //genotipo length 5
-    //maskIndices[4]= [-1,-1,-1,-1]
-    //maskIndices[4]= [-1,-1, 1,-1] al final va ser-----> [x,x,x,x]
-    //maskIndices[4]= [-1, 2,-1,-1]
-    //maskIndices[4]= [-1, 2, 1,-1]
-    //maskIndices[4]= [-1, 2, 1, 4] 
-    //maskIndices[4]= [ 3, 2, 1, 4]
 
     public static Individuo cruzaAsexual(Individuo padre, Individuo madre, int matrizCargada[][], int[] inclinaciones) {
         int maskIndices[] = new int[padre.getGenotipo().length - 1];
